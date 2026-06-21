@@ -1,0 +1,73 @@
+### PUBLIC API
+ 
+### Get all lines
+GET http://localhost:3001/api/lines
+ 
+### Get all stations
+GET http://localhost:3001/api/stations
+ 
+### Get all line-stations
+GET http://localhost:3001/api/line-stations
+ 
+### Get all segments
+GET http://localhost:3001/api/segments
+ 
+### Get all events
+GET http://localhost:3001/api/events
+ 
+
+### AUTH
+ 
+### Login (valid)
+POST http://localhost:3001/api/sessions
+Content-Type: application/json
+ 
+{
+  "email": "frodo@shire.com",
+  "password": "ringbearer"
+}
+ 
+### Login (wrong password) → 401
+POST http://localhost:3001/api/sessions
+Content-Type: application/json
+ 
+{
+  "email": "frodo@shire.com",
+  "password": "wrong"
+}
+ 
+### Login (invalid email) → 422
+POST http://localhost:3001/api/sessions
+Content-Type: application/json
+ 
+{
+  "email": "notanemail",
+  "password": "test"
+}
+ 
+### Check session
+GET http://localhost:3001/api/sessions/current
+ 
+### Logout
+DELETE http://localhost:3001/api/sessions/current
+ 
+
+### GAME (require login first)
+ 
+### Create new game
+POST http://localhost:3001/api/games
+ 
+### Get ranking
+GET http://localhost:3001/api/ranking
+ 
+### Submit route 
+POST http://localhost:3001/api/games/1/route
+Content-Type: application/json
+ 
+{
+  "segments": [
+    { "line_id": 1, "station1_id": 1, "station2_id": 2 },
+    { "line_id": 1, "station1_id": 2, "station2_id": 3 },
+    { "line_id": 1, "station1_id": 3, "station2_id": 4 }
+  ]
+}
