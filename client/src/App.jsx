@@ -2,12 +2,13 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import background from './assets/background.png'
 
 import { useContext, useState } from 'react';
-import { Container } from 'react-bootstrap';
+import { Container, Button } from 'react-bootstrap';
 import { Navigate, Outlet, Route, Routes, useNavigate } from 'react-router';
 
 import Header from './components/Header.jsx';
 import Footer from './components/Footer.jsx';
 import { LoginForm, Logout } from './components/LoginForm.jsx';
+import RankingView from './components/RankingView.jsx';
 
 import UserContext from './contexts/UserContext.js';
 
@@ -39,6 +40,7 @@ function App() {
             <Route path='home' element={<HomeView />} />
             <Route path='login' element={<LoginForm doLogin={doLogin} />} />
             <Route path='logout' element={<Logout handleLogout={handleLogout} />} />
+            <Route path='ranking' element={<RankingView />} />
           </Route>
         </Routes>
       </Container>
@@ -71,11 +73,18 @@ function WelcomeView() {
 
 function HomeView() {
   const user = useContext(UserContext);
+  const navigate = useNavigate();
   if (!user.id) return <Navigate to='/' />;
 
   return (
-    <div>
-      <h3>Welcome, {user.name}!</h3>
+    <div style={{ textAlign: 'center', padding: '20px' }}>
+      <h3 style={{ color: '#1a1a0e', fontFamily: 'serif' }}>Welcome, {user.name}!</h3>
+      <img src="src/assets/metromap_full.png" alt="Metro Map" style={{ maxWidth: '900px', width: '100%' }} />
+      <div style={{ marginTop: '20px' }}>
+        <Button onClick={() => navigate('/ranking')} style={{ backgroundColor: '#c9a84c', border: 'none', color: '#1a1a0e', fontFamily: 'serif', letterSpacing: '1px' }}>
+          View Ranking
+        </Button>
+      </div>
     </div>
   );
 }
