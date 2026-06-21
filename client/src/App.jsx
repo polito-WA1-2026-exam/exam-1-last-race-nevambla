@@ -1,4 +1,5 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
+import background from './assets/background.png'
 
 import { useContext, useState } from 'react';
 import { Container } from 'react-bootstrap';
@@ -26,7 +27,12 @@ function App() {
 
   return (
     <UserContext.Provider value={user}>
-      <Container fluid>
+      <Container fluid style={{
+        backgroundImage: `url(${background})`,
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+        minHeight: '100vh'
+      }}>
         <Routes>
           <Route path='/' element={<MainLayout />}>
             <Route index element={<WelcomeView />} />
@@ -41,11 +47,13 @@ function App() {
 }
 
 function MainLayout() {
-  return <>
+  return <div style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
     <Header />
-    <Outlet />
+    <div style={{ flex: 1 }}>
+      <Outlet />
+    </div>
     <Footer />
-  </>;
+  </div>;
 }
 
 function WelcomeView() {
@@ -53,8 +61,8 @@ function WelcomeView() {
   if (user.id) return <Navigate to='/home' />;
 
   return (
-    <div>
-      <h1>Last Race</h1>
+    <div style={{ textAlign: 'center', padding: '20px' }}>
+      <img src="src/assets/logo.png" alt="Last Race" style={{ maxWidth: '800px', width: '100%' }} />
       <p>A metro route planning game in Middle earth.</p>
       <p>Log in to start playing!</p>
     </div>

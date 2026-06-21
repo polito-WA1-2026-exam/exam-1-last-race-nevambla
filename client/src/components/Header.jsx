@@ -11,10 +11,10 @@ function Header() {
   const destination = user.id ? '/home' : '/';
 
   return (
-    <Navbar>
+    <Navbar style={{ backgroundColor: '#1a1a0e', borderBottom: '2px solid #c9a84c'}}>
       <Container fluid>
-        <Navbar.Brand as={Link} to={destination}>Last Race</Navbar.Brand>
-        <div>{user.name ? <UserInfo name={user.name} /> : <LoginButton />}</div>
+          <Navbar.Brand as={Link} to={destination} style={{ color: '#c9a84c', fontFamily: 'serif', fontSize: '1.5em', letterSpacing: '2px'}}>Last Race</Navbar.Brand>
+        <div style={{ color: '#c9a84c', fontFamily: 'serif' }}>{user.name ? <UserInfo name={user.name} /> : <LoginButton />}</div>
       </Container>
     </Navbar>
   );

@@ -20,23 +20,41 @@ function LoginForm(props) {
     }
   }
 
+  const formStyle = {
+    maxWidth: '400px',
+    margin: '40px auto',
+    padding: '30px',
+    backgroundColor: '#1a1a0e',
+    border: '2px solid #c9a84c',
+    borderRadius: '8px',
+    fontFamily: 'serif'
+  }
+
+  const labelStyle = { color: '#c9a84c', letterSpacing: '1px' }
+
+  const inputStyle = {
+    backgroundColor: '#2a2a1e',
+    border: '1px solid #c9a84c',
+    color: '#e8d5a3'
+  }
+
   return (
-    <Container>
-      <h2>Please login</h2>
+    <div style={formStyle}>
+      <h2 style={{ color: '#c9a84c', textAlign: 'center', letterSpacing: '2px', marginBottom: '20px' }}>Enter Middle earth</h2>
       <Form onSubmit={doSubmit}>
         <Form.Group controlId="formBasicEmail">
-          <Form.Label>Email address</Form.Label>
-          <Form.Control type="email" placeholder="Enter email" value={username} onChange={(ev) => setUsername(ev.target.value)} />
+          <Form.Label style={labelStyle}>Email address</Form.Label>
+          <Form.Control style={inputStyle} type="email" placeholder="Enter email" value={username} onChange={(ev) => setUsername(ev.target.value)} />
         </Form.Group>
         <Form.Group controlId="formBasicPassword">
-          <Form.Label>Password</Form.Label>
-          <Form.Control type="password" placeholder="Password" value={password} onChange={(ev) => setPassword(ev.target.value)} />
+          <Form.Label style={labelStyle}>Password</Form.Label>
+          <Form.Control style={inputStyle} type="password" placeholder="Password" value={password} onChange={(ev) => setPassword(ev.target.value)} />
         </Form.Group>
-        <Button variant="primary" type="submit">
+        <Button type="submit" style={{ backgroundColor: '#c9a84c', border: 'none', color: '#1a1a0e', fontFamily: 'serif', letterSpacing: '1px', width: '100%', marginTop: '15px' }}>
           Log in
-        </Button> {errormsg && <div>{errormsg}</div>}
+        </Button> {errormsg && <div style={{ color: '#ff6b6b', textAlign: 'center', marginTop: '10px' }}>{errormsg}</div>}
       </Form>
-    </Container>
+    </div>
   );
 }
 
