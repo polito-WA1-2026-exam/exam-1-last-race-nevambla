@@ -100,11 +100,30 @@ function WelcomeView() {
   if (user.id) return <Navigate to='/home' />;
 
   return (
-    <div style={{ textAlign: 'center', padding: '20px' }}>
+    <Container className='mt-4' style={{ maxWidth: '700px' }}>
+    <div style={{ textAlign: 'center'}}>
       <img src="src/assets/logo.png" alt="Last Race" style={{ maxWidth: '800px', width: '100%' }} />
-      <p>A metro route planning game in Middle earth.</p>
-      <p>Log in to start playing!</p>
     </div>
+    <div className='game-panel mb-3'>
+        <h5 style={{ color: '#c9a84c', fontFamily: 'serif' }}>How to Play</h5>
+        <p style={{ color: '#e8d5a3', fontFamily: 'serif' }}>
+          You start each game with <strong>20 coins</strong>. The server assigns you a random starting station
+          and a destination station. You have <strong>90 seconds</strong> to build a valid route by selecting
+          segments one by one from the available connections.
+        </p>
+        <p style={{ color: '#e8d5a3', fontFamily: 'serif' }}>
+          A valid route must start at the assigned origin, end at the assigned destination,
+          and change lines only at interchange stations. Each segment can only be used once.
+        </p>
+        <p style={{ color: '#e8d5a3', fontFamily: 'serif' }}>
+          Once submitted, a random event occurs at each segment of your journey, adding or removing
+          coins. If your route is invalid or incomplete, you lose all coins and score zero.
+        </p>
+        <p style={{ color: '#e8d5a3', fontFamily: 'serif' }}>
+          Your best score is recorded in the general ranking. Log in to start playing!
+        </p>
+      </div>
+      </Container>
   );
 }
 
