@@ -1,3 +1,6 @@
+import './custom.css';
+import logo from '../assets/logo.png';
+
 import { useContext } from "react";
 import { Button, Container, Navbar } from "react-bootstrap";
 import { Link, useNavigate } from 'react-router';
@@ -11,10 +14,12 @@ function Header() {
   const destination = user.id ? '/home' : '/';
 
   return (
-    <Navbar style={{ backgroundColor: '#1a1a0e', borderBottom: '2px solid #c9a84c'}}>
+    <Navbar className='header'>
       <Container fluid>
-          <Navbar.Brand as={Link} to={destination} style={{ color: '#c9a84c', fontFamily: 'serif', fontSize: '1.5em', letterSpacing: '2px'}}>Last Race</Navbar.Brand>
-        <div style={{ color: '#c9a84c', fontFamily: 'serif' }}>{user.name ? <UserInfo name={user.name} /> : <LoginButton />}</div>
+          <Navbar.Brand as={Link} to={destination} className='header-title'>
+            <img src={logo} alt="Last Race" className='header-logo' />
+          </Navbar.Brand>
+        <div className='header-right'>{user.name ? <UserInfo name={user.name} /> : <LoginButton />}</div>
       </Container>
     </Navbar>
   );
@@ -22,13 +27,13 @@ function Header() {
 
 function LoginButton() {
   const navigate = useNavigate();
-  return <Button onClick={() => navigate('/login')}>Log In</Button>;
+  return <Button className='btn-gold' onClick={() => navigate('/login')}>Log In</Button>;
 }
 
 function UserInfo(props) {
   return <div>
     <div>{props.name}</div>
-    <div><Link to='/logout'>Logout</Link></div>
+    <div><Link to='/logout' className='header-logout'>Logout</Link></div>
   </div>
 }
 

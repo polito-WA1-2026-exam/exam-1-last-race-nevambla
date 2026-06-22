@@ -1,3 +1,5 @@
+import './custom.css'
+
 import { useState, useEffect } from "react"
 import { doLogin, doLogout } from "../api/auth"
 import { useNavigate } from "react-router"
@@ -9,7 +11,7 @@ function LoginForm(props) {
   const [errormsg, setErrormsg] = useState('')
 
   const doSubmit = async (ev) => {
-    ev.preventDefault()
+    ev.preventDefault() // to prevent page reload when submitting the form
     setErrormsg('')
     try {
       const user = await doLogin(username, password)
@@ -20,39 +22,23 @@ function LoginForm(props) {
     }
   }
 
-  const formStyle = {
-    maxWidth: '400px',
-    margin: '40px auto',
-    padding: '30px',
-    backgroundColor: '#1a1a0e',
-    border: '2px solid #c9a84c',
-    borderRadius: '8px',
-    fontFamily: 'serif'
-  }
-
-  const labelStyle = { color: '#c9a84c', letterSpacing: '1px' }
-
-  const inputStyle = {
-    backgroundColor: '#2a2a1e',
-    border: '1px solid #c9a84c',
-    color: '#e8d5a3'
-  }
-
   return (
-    <div style={formStyle}>
-      <h2 style={{ color: '#c9a84c', textAlign: 'center', letterSpacing: '2px', marginBottom: '20px' }}>Enter Middle earth</h2>
+    <div className="login-box">
+      <h2>Enter Middle earth</h2>
       <Form onSubmit={doSubmit}>
         <Form.Group controlId="formBasicEmail">
-          <Form.Label style={labelStyle}>Email address</Form.Label>
-          <Form.Control style={inputStyle} type="email" placeholder="Enter email" value={username} onChange={(ev) => setUsername(ev.target.value)} />
+          <Form.Label className="login-label">Email address</Form.Label>
+          <Form.Control className="login-input" type="email" placeholder="Enter email" value={username} onChange={(ev) => setUsername(ev.target.value)} />
         </Form.Group>
         <Form.Group controlId="formBasicPassword">
-          <Form.Label style={labelStyle}>Password</Form.Label>
-          <Form.Control style={inputStyle} type="password" placeholder="Password" value={password} onChange={(ev) => setPassword(ev.target.value)} />
+          <Form.Label className="login-label">Password</Form.Label>
+          <Form.Control className="login-input" type="password" placeholder="Password" value={password} onChange={(ev) => setPassword(ev.target.value)} />
         </Form.Group>
-        <Button type="submit" style={{ backgroundColor: '#c9a84c', border: 'none', color: '#1a1a0e', fontFamily: 'serif', letterSpacing: '1px', width: '100%', marginTop: '15px' }}>
+        <Button type="submit" className="btn-gold-full">
           Log in
-        </Button> {errormsg && <div style={{ color: '#ff6b6b', textAlign: 'center', marginTop: '10px' }}>{errormsg}</div>}
+        </Button> 
+        {errormsg && 
+        <div className="login-error">{errormsg}</div>}
       </Form>
     </div>
   );

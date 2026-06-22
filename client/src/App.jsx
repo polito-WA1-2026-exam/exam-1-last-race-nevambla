@@ -1,14 +1,18 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import background from './assets/background.png'
 
-import { useContext, useState } from 'react';
+import { useContext, useState, useEffect } from 'react';
 import { Container, Button } from 'react-bootstrap';
 import { Navigate, Outlet, Route, Routes, useNavigate } from 'react-router';
+
+import { getLines, getStations, getSegments, createGame } from './api/api';
 
 import Header from './components/Header.jsx';
 import Footer from './components/Footer.jsx';
 import { LoginForm, Logout } from './components/LoginForm.jsx';
 import RankingView from './components/RankingView.jsx';
+import GameView from './components/GameView.jsx';
+import ResultView from './components/ResultView.jsx';
 
 import UserContext from './contexts/UserContext.js';
 
@@ -17,6 +21,13 @@ function App() {
 
   const [user, setUser] = useState({ id: undefined, email: undefined, name: undefined });
 
+  const [lines, setLines] = useState([]);
+  const [stations, setStations] = useState([]);
+  const [segments, setSegments] = useState([]);
+
+  const [game, setGame] = useState(null);
+  const [result, setResult] = useState(null);
+
   const doLogin = (newUser) => {
     setUser({ id: newUser.id, email: newUser.email, name: newUser.name });
     navigate('/home');
@@ -24,6 +35,29 @@ function App() {
 
   const handleLogout = () => {
     setUser({ id: undefined, email: undefined, name: undefined });
+    setGame(null);
+    setResult(null);
+  };
+
+  useEffect(() => {
+    if (!user.id) return;
+    Promise.all([getLines(), getStations(), getSegments()])
+      .then(([l, s, seg]) => { setLines(l); setStations(s); setSegments(seg); })
+      .catch(() => {});
+  }, [user.id]);
+
+  const startGame = async () => {
+    const g = await createGame();
+    setGame(g);
+    setResult(null);
+    navigate('/game');
+  };
+  
+  // called from gaveview when game ends
+  const endGame = (res) => {
+    setResult(res);
+    setGame(null);
+    navigate('/result');
   };
 
   return (
@@ -37,10 +71,12 @@ function App() {
         <Routes>
           <Route path='/' element={<MainLayout />}>
             <Route index element={<WelcomeView />} />
-            <Route path='home' element={<HomeView />} />
+            <Route path='home' element={<HomeView startGame={startGame} result={result} />} />
             <Route path='login' element={<LoginForm doLogin={doLogin} />} />
             <Route path='logout' element={<Logout handleLogout={handleLogout} />} />
             <Route path='ranking' element={<RankingView />} />
+            <Route path='game' element={<GameView game={game} segments={segments} stations={stations} lines={lines} endGame={endGame} />} />
+            <Route path='result' element={<ResultView result={result} />} />
           </Route>
         </Routes>
       </Container>
@@ -58,6 +94,7 @@ function MainLayout() {
   </div>;
 }
 
+// for user not logged in
 function WelcomeView() {
   const user = useContext(UserContext);
   if (user.id) return <Navigate to='/home' />;
@@ -71,7 +108,7 @@ function WelcomeView() {
   );
 }
 
-function HomeView() {
+function HomeView({ startGame, result }) {
   const user = useContext(UserContext);
   const navigate = useNavigate();
   if (!user.id) return <Navigate to='/' />;
@@ -79,8 +116,19 @@ function HomeView() {
   return (
     <div style={{ textAlign: 'center', padding: '20px' }}>
       <h3 style={{ color: '#1a1a0e', fontFamily: 'serif' }}>Welcome, {user.name}!</h3>
+      
+      {result && (
+        <div style={{ backgroundColor: '#1a1a0e', border: '2px solid #c9a84c', borderRadius: '8px', padding: '20px', maxWidth: '500px', margin: '15px auto', fontFamily: 'serif' }}>
+          <h4 style={{ color: '#c9a84c' }}>Last Result</h4>
+          <p style={{ color: result.valid ? '#4a7c59' : '#e63946', fontSize: '1.2em' }}>
+            {result.valid ? `Score: ${result.score} coins` : 'Invalid route'}
+          </p>
+        </div>
+      )}
+      
       <img src="src/assets/metromap_full.png" alt="Metro Map" style={{ maxWidth: '900px', width: '100%' }} />
       <div style={{ marginTop: '20px' }}>
+        <Button onClick={startGame} className='me-2' style={{ backgroundColor: '#c9a84c', border: 'none', color: '#1a1a0e', fontFamily: 'serif', letterSpacing: '1px' }}>New Game</Button>        
         <Button onClick={() => navigate('/ranking')} style={{ backgroundColor: '#c9a84c', border: 'none', color: '#1a1a0e', fontFamily: 'serif', letterSpacing: '1px' }}>
           View Ranking
         </Button>

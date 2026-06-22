@@ -1,0 +1,217 @@
+.header {
+    background-color: #1a1a0e;
+    border-bottom: 2px solid #c9a84c;
+}
+ 
+.header-title {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+}
+ 
+.header-right {
+    color: #c9a84c;
+    font-family: serif;
+    margin-left: auto;
+}
+
+.header-logo {
+    height: 120px;
+}
+
+.header-logout {
+    color: #c9a84c;
+    text-decoration: underline;
+}
+
+.header-logout:hover {
+    color: #b8963a;
+}
+
+/* --------------------- */
+.footer {
+    width: 100%;
+    text-align: center;
+    background-color: #1a1a0e;
+    color: #c9a84c;
+    padding: 12px;
+    border-top: 2px solid #c9a84c;
+    font-family: serif;
+    letter-spacing: 1px;
+}
+
+/* --------------------- */
+.ranking-header {
+    font-weight: bold;
+    border-bottom: 2px solid #c9a84c;
+    padding-bottom: 5px;
+    margin-bottom: 5px;
+}
+ 
+.ranking-row {
+    padding: 5px 0;
+}
+ 
+/* --------------------- */
+.btn-gold {
+    background-color: #c9a84c;
+    border: none;
+    color: #1a1a0e;
+    font-family: serif;
+    letter-spacing: 1px;
+    margin-bottom: 10px;
+    margin-top: 10px;
+}
+
+.btn-gold:hover {
+    background-color: #b8963a;
+    color: #1a1a0e;
+}
+
+.btn-gold-full {
+    background-color: #c9a84c;
+    border: none;
+    color: #1a1a0e;
+    font-family: serif;
+    letter-spacing: 1px;
+    width: 100%;
+    margin-top: 15px;
+}
+
+.btn-gold-full:hover {
+    background-color: #b8963a;
+    color: #1a1a0e;
+}
+
+.btn-outline-gold {
+    background-color: transparent;
+    border: 1px solid #e8d5a3;
+    color: #e8d5a3;
+    font-family: serif;
+    margin-bottom: 10px;
+    margin-top: 10px;
+}
+
+.btn-outline-gold:hover {
+    background-color: #b8963a;
+    color: #1a1a0e;
+    border: 1px solid #b8963a;
+}
+
+.btn-outline-dark {
+    background-color: transparent;
+    border: 1px solid #1a1a0e;
+    color: #1a1a0e;
+    font-family: serif;
+    margin-bottom: 10px;
+    margin-top: 10px;
+}
+
+.btn-outline-dark:hover {
+    background-color: #b8963a;
+    color: #1a1a0e;
+    border: 1px solid #b8963a;
+}
+
+/* --------------------- */
+.login-box {
+    max-width: 400px;
+    margin: 40px auto;
+    padding: 30px;
+    background-color: #1a1a0e;
+    border: 2px solid #c9a84c;
+    border-radius: 8px;
+    font-family: serif;
+}
+ 
+.login-box h2 {
+    color: #c9a84c;
+    text-align: center;
+    letter-spacing: 2px;
+    margin-bottom: 20px;
+}
+ 
+.login-label {
+    color: #c9a84c;
+    letter-spacing: 1px;
+}
+ 
+.login-input {
+    background-color: #2a2a1e;
+    border: 1px solid #c9a84c;
+    color: #e8d5a3;
+}
+ 
+.login-error {
+    color: #ff6b6b;
+    text-align: center;
+    margin-top: 10px;
+}
+
+/* --------------------- */
+.game-mission {
+    color: #e8d5a3;
+    font-family: serif;
+    font-size: 1.2em;
+}
+ 
+.game-timer {
+    color: #e8d5a3;
+    font-family: serif;
+}
+ 
+.game-timer-danger {
+    color: #e63946;
+    font-family: serif;
+}
+ 
+.game-map {
+    max-width: 900px;
+    width: 100%;
+}
+ 
+.game-panel {
+    background-color: #1a1a0e;
+    border: 2px solid #c9a84c;
+    border-radius: 8px;
+    padding: 15px;
+    margin-top: 20px;
+}
+ 
+.game-panel h5 {
+    color: #c9a84c;
+    font-family: serif;
+}
+ 
+.game-segment-row {
+    padding: 4px 0;
+    color: #e8d5a3;
+    cursor: pointer;
+}
+ 
+.game-route-row {
+    padding: 4px 0;
+    color: #e8d5a3;
+}
+ 
+.game-muted {
+    color: #888;
+}
+
+.game-title-img {
+    height: 80px;
+}
+
+/* --------------------- */
+.result-event-img {
+    width: 100%;
+    max-width: 500px;
+    display: block;
+    margin: 8px auto 0;
+}
+
+.result-invalid {
+    color: #e63946;
+    font-family: serif;
+    font-size: 1.5em;
+}
