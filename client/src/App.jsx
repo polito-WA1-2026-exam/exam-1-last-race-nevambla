@@ -56,7 +56,6 @@ function App() {
   // called from gaveview when game ends
   const endGame = (res) => {
     setResult(res);
-    setGame(null);
     navigate('/result');
   };
 
