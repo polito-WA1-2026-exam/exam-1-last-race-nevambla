@@ -1,12 +1,17 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import { Button, Col, Container, Row } from 'react-bootstrap';
-import { useNavigate } from 'react-router';
+import { Navigate, useNavigate } from 'react-router';
 
 import { getRanking } from '../api/api';
+
+import UserContext from '../contexts/UserContext';
 
 function RankingView() {
   const navigate = useNavigate();
   const [ranking, setRanking] = useState([]);
+
+  const user = useContext(UserContext);
+  if (!user.id) return <Navigate to='/' />;
 
   useEffect(() => {
     getRanking()
