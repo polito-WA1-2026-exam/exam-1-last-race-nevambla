@@ -272,6 +272,8 @@ app.post("/api/games/:id/route", isLoggedIn, [
 
     // calculate score
     const events = await getEvents();
+    const allStations = await getStations();
+    const stationMap = new Map(allStations.map(s => [s.id, s.name]));
     let score = 20;
     const steps = [];
 
@@ -281,9 +283,11 @@ app.post("/api/games/:id/route", isLoggedIn, [
         score += event.effect;
         steps.push({
           station1_id: seg.station1_id,
+          station1_name: stationMap.get(seg.station1_id),
           station2_id: seg.station2_id,
+          station2_name: stationMap.get(seg.station2_id),
           line_id: seg.line_id,
-          event: { description: event.description, effect: event.effect },
+          event: { id: event.id, description: event.description, effect: event.effect },
           coins: score
         });
       }
