@@ -76,7 +76,7 @@ function App() {
             <Route path='logout' element={<Logout handleLogout={handleLogout} />} />
             <Route path='ranking' element={<RankingView />} />
             <Route path='game' element={<GameView game={game} segments={segments} stations={stations} lines={lines} endGame={endGame} />} />
-            <Route path='result' element={<ResultView result={result} />} />
+            <Route path='result' element={<ResultView result={result} startGame={startGame} />} />
           </Route>
         </Routes>
       </Container>

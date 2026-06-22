@@ -2,7 +2,7 @@ import './custom.css';
 import route from '../assets/route.png';
 import timeleft from '../assets/timeleft.png';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import { Button, Col, Container, Row } from 'react-bootstrap';
 
 import { submitRoute } from '../api/api';
@@ -33,8 +33,13 @@ function GameView({ game, segments, stations, lines, endGame }) {
     Math.min(s.station1_id, s.station2_id) + '-' + Math.max(s.station1_id, s.station2_id) //normalized
   ));
 
+  // random order during the game
+  const shuffledSegments = useMemo(() => {
+    return [...segments].sort(() => 0.5 - Math.random());
+  }, [segments]);
+
   // available segments = all segments - used segments
-  const available = segments.filter(seg => {
+  const available = shuffledSegments.filter(seg => {
     const normKey = Math.min(seg.station1_id, seg.station2_id) + '-' + Math.max(seg.station1_id, seg.station2_id);
     return !usedKeys.has(normKey); // false = already used, true = available
   });

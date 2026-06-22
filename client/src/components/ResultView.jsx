@@ -3,7 +3,7 @@ import { Button, Col, Container, Row } from 'react-bootstrap';
 import { useNavigate } from 'react-router';
 import './custom.css';
 
-function ResultView({ result }) {
+function ResultView({ result , startGame }) {
   const navigate = useNavigate();
   const [currentStep, setCurrentStep] = useState(0);
 
@@ -18,6 +18,7 @@ function ResultView({ result }) {
           <p className='result-invalid'>Score: 0 coins</p>
           <Button className='me-2 btn-gold' onClick={() => navigate('/home')}>Go Home</Button>
           <Button className='btn-outline-gold' onClick={() => navigate('/ranking')}>View Ranking</Button>
+          <Button className='me-2 btn-gold' onClick={startGame}>Play Again</Button>
         </div>
       </Container>
     );
@@ -33,6 +34,7 @@ function ResultView({ result }) {
         <h2 className='game-mission'>Final Score: {result.score} coins</h2>
         <Button className='me-2 btn-gold' onClick={() => navigate('/home')}>Go Home</Button>
         <Button className='btn-outline-gold' onClick={() => navigate('/ranking')}>View Ranking</Button>
+        <Button className='me-2 btn-gold' onClick={startGame}>Play Again</Button>
         </div>
       </Container>
     );
