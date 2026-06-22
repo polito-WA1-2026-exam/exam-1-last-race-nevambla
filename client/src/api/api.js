@@ -68,7 +68,7 @@ async function createGame() {
 
 async function submitRoute(gameId, segments) {
   try {
-    const response = await fetch('http://localhost:3001/api/games/', {
+    const response = await fetch('http://localhost:3001/api/games/' + gameId + '/route', {
       method: 'POST',
       body: JSON.stringify({ segments: segments }),
       headers: { 'Content-Type': 'application/json' },
